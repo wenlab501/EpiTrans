@@ -1,0 +1,49 @@
+#' calculate individual R
+#'
+#' calculate individual R and matrix of transmission probability
+#' @param mean mean.
+#' @keywords median
+#' @export
+#' @examples
+#' median_function(seq(1:10))
+
+calc.Rj <- function(t, x, y, adjSP=TRUE, GI.pdf=lpdf_GI(), SW.pdf=lpdf_SW(), unit_coord=c("degree","meter")){
+  N <- length(t)
+  data <- data.frame(t = as.numeric(t))
+  if(adjSP){
+    if(missing(x)) stop("missing argument x")
+    if(missing(x)) stop("missing argument y")
+    if(N!=length(x)) stop("x have different length from t")
+    if(N!=length(y)) stop("y have different length from t")
+    data$x <- as.numeric(x)
+    data$y <- as.numeric(y)
+    unit_coord <- unit_coord[1]
+  }
+  data <- data[order(data$t),]
+
+  #calculate Rt consider time
+  dist.time <- as.vector(dist(t))
+  lik <- GI.pdf(dist.time)
+
+  #calculate Rt consider space
+  if(adjSP){
+    if(unit_coord=="degree") dist.space <- distLongLat(data$x,data$y)
+    else if(unit_coord=="meter") dist.space <-as.vector(dist(cbind(data$x,data$y)))
+    else stop("set space unit to degree or meter")
+    dist.space[dist.space==0] <- 1
+    likSP <- SW.pdf(dist.space)
+    likSP[lik==0] <- 0
+    lik <- lik + likSP
+  }
+
+  lik <- exp(lik)
+
+  mat <- matrix(0,N,N)
+  mat[lower.tri(mat)] <- lik
+  mat <- t(mat)
+
+  matColSum <- 1 / colSums(mat,na.rm = T)
+  Pij <- t(apply(mat,1,function(x) x*matColSum))
+  Rj <- rowSums(Pij,na.rm = T)
+  return(list(Rj=Rj, Pij=Pij))
+}

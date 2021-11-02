@@ -17,6 +17,7 @@ plot.points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basem
 
   # create points
   XY.data <- data.frame(x, y)
+  if(!is.null(t)) XY.data$t <- as.numeric(t)
   if(!is.null(Rj)) XY.data$Rj <- Rj
   points <- createPoints(XY.data, crs, basemap)
   points <- st_transform(points, 4326)
@@ -57,10 +58,18 @@ plot.points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basem
         tm_add_legend("symbol", paste0(0:9*10, "%~", 1:10*10, "%"), get_brewer_pal("YlOrRd", 10, plot = FALSE), 1:10*0.1, border.col = NA, title ="Rj (quantile)")+
         tm_layout(outer.margins = .05, legend.outside = TRUE, legend.outside.position = "right")
     }
-
   }else{
-    PointsMap <- tm_shape(points, bbox = bnd) +
-      tm_dots(col = "red", size = ifelse(interact, .05, .3), alpha = .3)
+    ts=seq(min(t),max(t),length.out = 11)
+    if(interact){
+      PointsMap <- tm_shape(points, bbox = bnd) +
+        tm_dots(col = "t", size = .05, n = 10, palette = rainbow(10), alpha = .6, legend.show = FALSE) +
+        tm_add_legend("fill", paste0(ts[1:10], "~", ts[2:11]), rainbow(10), title = "Date",alpha = .6)
+    }else{
+      PointsMap <- tm_shape(points, bbox = bnd) +
+        tm_dots(col = "t", size = .3, alpha = .3, n = 10, palette = rainbow(10), legend.show = FALSE) +
+        tm_add_legend("symbol", paste0(ts[1:10], "~", ts[2:11]), rainbow(10), title = "Date",alpha = .6)+
+        tm_layout(outer.margins = .05, legend.outside = TRUE, legend.outside.position = "right")
+    }
   }
 
 

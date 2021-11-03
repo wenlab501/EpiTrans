@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-animate_polygons <- function(region, t, sf, interval=c("day","week","month"), breaks = NULL, gridLatLong = TRUE, width = 600, height = 400, delay = 50){
+animate_polygons <- function(region, t, sf, interval=c("day","week","month"), breaks = NULL, gridLonLat = TRUE, width = 600, height = 400, delay = 50){
   require("sf")
   require("tmap")
   require("tmaptools")

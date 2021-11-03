@@ -8,7 +8,7 @@ plot_grid(
   x,
   y,
   Rj = NULL,
-  hex = F,
+  hex = FALSE,
   grid.n = 50,
   crs = NULL,
   bnd = NULL,

@@ -4,7 +4,7 @@
 \alias{plot_polygons}
 \title{Title}
 \usage{
-plot_polygons(region, sf, interact = TRUE, gridLatLong = TRUE)
+plot_polygons(region, sf, interact = TRUE, gridLonLat = TRUE)
 }
 \arguments{
 \item{mean}{mean.}

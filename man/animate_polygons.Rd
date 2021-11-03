@@ -10,7 +10,7 @@ animate_polygons(
   sf,
   interval = c("day", "week", "month"),
   breaks = NULL,
-  gridLatLong = TRUE,
+  gridLonLat = TRUE,
   width = 600,
   height = 400,
   delay = 50

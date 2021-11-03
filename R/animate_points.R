@@ -1,0 +1,64 @@
+#' Title
+#'
+#' Descriptions Here
+#' @param mean mean.
+#' @param sd sd
+#' @keywords median
+#' @export
+#' @examples
+#' median_function(seq(1:10))
+
+animate_points <- function(x, y, t, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interval=c("day","week","month"), gridLonLat = TRUE, width = 600, height = 400, delay = 50, title=""){
+  require("sf")
+  require("tmap")
+  require("tmaptools")
+
+  if(is.null(crs)) crs <- 4326
+
+  if(length(interval)>2) interval <- interval[1]
+  date.diff=as.numeric(max(t)-min(t))
+  level.t <- min(t)+0:date.diff
+  if(interval=="week"){
+    t <- strftime(t,"%Y-%W")
+    level.t <- unique(strftime(level.t,"%Y-%W"))
+  }else if(interval=="month"){
+    t <- strftime(t,"%Y-%m")
+    level.t <- unique(strftime(level.t,"%Y-%m"))
+  }
+
+  # create points
+  XY.data <- data.frame(x, y, t)
+  if(!is.null(Rj)) XY.data$Rj <- Rj
+  points <- createPoints(XY.data, crs, basemap)
+  points <- st_transform(points, 4326)
+  points$t <- as.factor(points$t)
+  levels(points$t) <- level.t
+
+
+  # boundary
+  if(is.null(bnd)) bnd <- bnd_modify(points)
+
+  # basemap
+  BaseMap <- CreateBaseMap(basemap,bnd,gridLonLat,interact = FALSE, alphaGrid =.1)
+
+  #plotting
+  if(is.null(Rj)){
+    PointsMap <- tm_shape(points, bbox = bnd) +
+      tm_dots(col = "red", size = .3, alpha = .3)+
+      tm_facets(along = "t")
+  }else{
+      PointsMap <- tm_shape(points, bbox = bnd) +
+        tm_symbols(size = "Rj", col = "Rj", style="quantile", border.col = NA, border.alpha = .5, n = 10, palette="YlOrRd", alpha = .6, legend.size.show = FALSE, legend.col.show = FALSE)+
+        tm_add_legend("symbol", paste0(0:9*10, "%~", 1:10*10, "%"), get_brewer_pal("YlOrRd", 10, plot = FALSE), 1:10*0.1, border.col = NA, title ="Rj (quantile)")+
+        tm_layout(outer.margins = .05, legend.outside = TRUE, legend.outside.position = "right")+
+        tm_facets(along = "t")
+  }
+
+  Map <- PointsMap +
+    BaseMap +
+    tm_layout (title = title,legend.format=list(text.separator="~")) +
+    tm_scale_bar()+
+    tm_compass(position=c("left", "top"))
+
+  tmap_animation(Map, delay = delay)
+}

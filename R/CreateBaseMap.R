@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-CreateBaseMap  <- function(basemap,bnd,gridLonLat,interact) {
+CreateBaseMap  <- function(basemap, bnd, gridLonLat, interact, alphaGrid = 1) {
   BaseMap <- NULL
   if(gridLonLat & !interact) BaseMap <- tm_grid(col = "white") + tm_layout (bg.color = "#D2E9FF")
   if(!is.null(basemap)){
@@ -19,7 +19,7 @@ CreateBaseMap  <- function(basemap,bnd,gridLonLat,interact) {
     }else{
       BaseMap <- BaseMap +
         tm_shape(basemap, bbox = bnd) +
-        tm_polygons(col = "#DFFFDF", border.col = "darkgreen") +
+        tm_polygons(col = "#DFFFDF", alpha = alphaGrid, border.col = "darkgreen") +
         tm_layout (bg.color = "#D2E9FF")
     }
   }

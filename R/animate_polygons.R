@@ -16,8 +16,17 @@ animate_polygons <- function(region, t, sf, interval=c("day","week","month"), br
   require("reshape2")
 
   if(length(interval)>2) interval <- interval[1]
-  if(interval=="week") t=strftime(t,"%Y-%W")
-  else if(interval=="month") t=strftime(t,"%Y-%m")
+  date.diff=as.numeric(max(t)-min(t))
+  level.t <- min(t)+0:date.diff
+  if(interval=="week"){
+    t <- strftime(t,"%Y-%W")
+    level.t <- unique(strftime(level.t,"%Y-%W"))
+  }else if(interval=="month"){
+    t <- strftime(t,"%Y-%m")
+    level.t <- unique(strftime(level.t,"%Y-%m"))
+  }
+  t <- as.factor(t)
+  levels(t) <- level.t
 
   region <- factor(region,levels=sf$region)
   df <- as.data.frame.matrix(xtabs(~region+t))

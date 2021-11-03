@@ -4,7 +4,7 @@
 \alias{CreateBaseMap}
 \title{Title}
 \usage{
-CreateBaseMap(basemap, bnd, gridLonLat, interact)
+CreateBaseMap(basemap, bnd, gridLonLat, interact, alphaGrid = 1)
 }
 \arguments{
 \item{mean}{mean.}

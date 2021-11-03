@@ -1,3 +1,4 @@
+
 summary.y <- function(x,probs=c(.25,.5,.75)){
   x <- stats::na.omit(x)
   v <- quantile(x, probs)
@@ -61,140 +62,11 @@ plot.epi <- function(t){
 # plot point pattern of individual R
 
 
-cen.pts <- function(sdf, bnd){
-  d1 <- st_coordinates(sdf$geometry)[,1] >= bnd[1]
-  d2 <- st_coordinates(sdf$geometry)[,1] <= bnd[3]
-  d3 <- st_coordinates(sdf$geometry)[,2] >= bnd[2]
-  d4 <- st_coordinates(sdf$geometry)[,2] <= bnd[4]
-  return(sdf[(d1&d2&d3&d4),])
-}
-
-plot.kde <-  function(x, y, ngrid=100,  crs_pts=NULL, bnd=NULL, base_map=NULL){
-
-  pts <- create.pts_sf(x, y, crs_pts, base_map )
-  if(is.null(bnd)) bnd <- st_bbox(pts)
-  bnd <- rescale.bnd(bnd)
-
-  pts <- cbind(pts, st_coordinates(pts$geometry) )
-  bwidth <- (MASS::bandwidth.nrd(pts$X)+MASS::bandwidth.nrd(pts$Y))/2
-
-  G0 <- create.basemap(base_map)
-  bs <- G0$theme$text$size
-
-  G0 +
-    stat_density_2d(data = pts,
-                    mapping = aes(x=X, y=Y, fill = log(..level..)), alpha=.7,
-                    geom = "polygon", h = bwidth, n=ngrid)+
-    scale_fill_distiller(palette = "RdYlBu",
-                         guide =  guide_colorbar(barwidth=unit(.5,"npc"),
-                                                 barheight=unit(.02,"npc"),
-                                                 direction = "horizontal",
-                                                 title="Clustering tendency (log)",
-                                                 title.theme = element_text(size=bs*.6),
-                                                 label.theme = element_text(size=bs*.6),
-                                                 title.position = "top"))+
-    coord_sf(xlim = c(bnd[1],bnd[3]),ylim =c(bnd[2],bnd[4]) ,
-             crs = st_crs(pts))+
-    labs(x="", y="")
-
-}
-
-plot.hex <- function(x, y, Rj=NULL, nbin=30,
-                     crs_pts=NULL, bnd=NULL,  base_map=NULL){
-
-  pts <- create.pts_sf(x, y, crs_pts, base_map )
-  pts <- cbind(pts, st_coordinates(pts$geometry) )
-  if(is.null(bnd)) bnd <- st_bbox(pts)
-  bnd <- rescale.bnd(bnd)
-
-  if(!is.null(Rj)){
-    z <- Rj
-    zlab <- "Mean Rj"
-    f.agg <- mean
-    colset <- "YlGnBu"
-  }else{
-    z <- rep(1, length(x))
-    zlab <- "Counts"
-    f.agg <- sum
-    colset <- "YlOrRd"
-  }
-  pts <- cbind(pts, z)
-
-  pts <-cen.pts(pts, bnd)
-  pts.hex <- hexbin::hexbin(pts$X, pts$Y, IDs=T, xbins=nbin ,
-                            xbnds=c(bnd[1], bnd[3]),
-                            ybnds=c(bnd[2], bnd[4]),shape =1
-  )
-  pts$cID <- pts.hex@cID
-  z.hex <- aggregate(formula= z ~ cID, data=pts, FUN = f.agg)
-
-  gdf <- data.frame(hexbin::hcell2xy(pts.hex),
-                    cell = pts.hex@cell,
-                    z = z.hex$z)
-  G0 <- create.basemap(base_map)
-  bs <- G0$theme$text$size
-  G0 +
-    geom_hex(data = gdf, mapping = aes(x=x, y=y, fill=z),
-             colour="white", alpha=.7, stat="identity")+
-    scale_fill_distiller(palette = colset, direction = 1,
-                         guide =  guide_colorbar(barwidth=unit(.5,"npc"),
-                                                 barheight=unit(.02,"npc"),
-                                                 direction = "horizontal",
-                                                 title = zlab,
-                                                 title.theme = element_text(size=bs*.6),
-                                                 label.theme = element_text(size=bs*.6),
-                                                 title.position = "top"))+
-    coord_sf(xlim = c(bnd[1], bnd[3]),ylim =c(bnd[2], bnd[4]), expand=F,
-             crs = st_crs(pts))+
-    labs(x="", y="")
-
-}
-
-plot.points <- function(x, y, Rj=NULL,
-                        crs_pts=NULL, bnd=NULL,  base_map=NULL){
-
-  pts <- create.pts_sf(x, y, crs_pts, base_map )
-  if(is.null(bnd)) bnd <- st_bbox(pts)
-  bnd <- rescale.bnd(bnd)
 
 
-  if(is.null(Rj)){
-    pts$qRj <- factor("i")
-    colset<-c("i"="#A03638")
-    psset<-c("i"=3)
-    leg <- F
-  } else{
-    qn <- 10
-    pts$qRj <- get.qRj(Rj, qn = qn)
-    colset <- colorRampPalette(c("#eac77b","#8c0d26"))(qn)
-    psset <- seq(.5,6,length.out = qn)
-    names(colset) <- levels(pts$qRj)
-    names(psset) <- levels(pts$qRj)
-    leg <- "point"
-  }
 
 
-  G0 <- create.basemap(base_map)
-  bs <- G0$theme$text$size
-  gui <- guide_legend(direction = "horizontal",
-                      title = "Percentile of Rj",
-                      title.theme = element_text(size=bs*.6),
-                      label.theme = element_text(size=bs*.6),
-                      title.position = "top")
-  G <- G0 +
-    geom_sf(data = pts,mapping = aes(size=qRj, color=qRj),alpha=.5,
-            show.legend = leg)+
-    scale_color_manual(values = colset,drop=F)+
-    scale_size_manual(values = psset,drop=F)+
-    guides(size = gui, col = gui)+
-    coord_sf(xlim = c(bnd[1],bnd[3]),ylim =c(bnd[2],bnd[4]) ,crs = crs_pts)+
-    theme(legend.background = element_rect(color="white",
-                                           fill="#fbf6e9"),
-          legend.key = element_blank(),
-          legend.position = c(.98,.02))
 
-  return(G)
-}
 
 
 animate.points <- function(t, x, y, Rj, dt=14, crs_pts=NULL, bnd=NULL,  base_map=NULL){
@@ -261,7 +133,6 @@ animate.points <- function(t, x, y, Rj, dt=14, crs_pts=NULL, bnd=NULL,  base_map
 
   animate(G, fps = 1,duration=max(pts$t.int))
 }
-
 
 animate.hex <- function(t, x, y, Rj, dt=14, nbin=30,
                         crs_pts=NULL, bnd=NULL,  base_map=NULL){
@@ -349,9 +220,7 @@ animate.hex <- function(t, x, y, Rj, dt=14, nbin=30,
   animate(G, fps = 1,duration=max(df.hex$t.int))
 }
 
-image.Rj=function(Rj,N=200,...){
-  image(Rj$Pij[1:N, 1:N],colorkey = T, lwd =0, at = seq(0,.25,.0025))
-}
+
 
 
 

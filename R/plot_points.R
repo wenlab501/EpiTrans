@@ -8,10 +8,11 @@
 #' @examples
 #' median_function(seq(1:10))
 
-plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interact = TRUE, grid = TRUE, title = ""){
+plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interact = TRUE, gridLonLat = TRUE, title = ""){
   require("sf")
   require("tmap")
   require("tmaptools")
+
   if(interact) tmap_mode("view") else tmap_mode("plot")
   if(is.null(crs)) crs <- 4326
 
@@ -23,25 +24,10 @@ plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basem
   points <- st_transform(points, 4326)
 
   # boundary
-  if(is.null(bnd)) bnd <- boundary(points)
-  xlim <- c(bnd[1], bnd[3])
-  ylim <- c(bnd[2], bnd[4])
+  if(is.null(bnd)) bnd <- bnd_modify(points)
 
   # basemap
-  BaseMap <- NULL
-  if(grid & !interact) BaseMap <- tm_grid(col = "white")
-  if(!is.null(basemap)){
-    basemap = st_transform(basemap, 4326)
-    if(interact){
-      BaseMap <- tm_shape(basemap, bbox = bnd) +
-        tm_polygons(col = "darkgreen", alpha = .1, border.col = "darkgreen")
-    }else{
-      BaseMap <- BaseMap +
-        tm_shape(basemap, bbox = bnd) +
-        tm_polygons(col = "#DFFFDF", border.col = "darkgreen")+
-        tm_layout (bg.color = "#D2E9FF")
-    }
-  }
+  BaseMap <- CreateBaseMap(basemap,bnd,gridLonLat,interact)
 
   #plotting
   if(is.null(t) & is.null(Rj)){
@@ -75,7 +61,7 @@ plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basem
 
   Map <- BaseMap +
     PointsMap +
-    tm_layout (title = title) +
+    tm_layout (title = title,legend.format=list(text.separator="~")) +
     tm_scale_bar()
 
   if(!interact)  Map <- Map + tm_compass(position=c("left", "top"))

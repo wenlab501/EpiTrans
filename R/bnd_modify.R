@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-boundary <- function(sf){
+bnd_modify <- function(sf){
   require("sf")
   bnd <- st_bbox(sf)
   x <- bnd[1]

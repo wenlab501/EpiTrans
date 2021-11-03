@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-plot_polygons=function(region, sf, interact = TRUE, gridLatLong = TRUE){
+plot_polygons=function(region, sf, interact = TRUE, gridLonLat = TRUE){
   require("sf")
   require("tmap")
   require("tmaptools")

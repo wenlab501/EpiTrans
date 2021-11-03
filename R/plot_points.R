@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-plot.points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interact = TRUE, grid = TRUE, title = ""){
+plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interact = TRUE, grid = TRUE, title = ""){
   require("sf")
   require("tmap")
   require("tmaptools")

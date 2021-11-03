@@ -19,4 +19,7 @@ EpiTransLibrary <- function() {
   library("tmap")
   library("reshape2")
   library("stplanr")
+  library("MASS")
+  library("tmaptools")
+  library("SpatialKDE")
 }

@@ -7,7 +7,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-calc.Rj <- function(t, x, y, adjSP=TRUE, GI.pdf=lpdf_GI(), SW.pdf=lpdf_SW(), unit_coord=c("degree","meter")){
+Rj <- function(t, x, y, adjSP=TRUE, GI.pdf=lpdf_GI(), SW.pdf=lpdf_SW(), unit_coord=c("degree","meter")){
   N <- length(t)
   data <- data.frame(t = as.numeric(t))
   if(adjSP){

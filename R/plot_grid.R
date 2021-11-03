@@ -30,7 +30,7 @@ plot_grid <- function(x, y, Rj = NULL, hex=F, grid.n=50, crs = NULL, bnd = NULL,
   grid <- st_sf(grid)
   grid.pts <- st_contains(grid, points)
   grid$Counts <- lengths(grid.pts)
-  if(!is.null(Rj)) grid$Sum_Rj <-sapply(grid.pts, function(x) sum(points$Rj[x]))
+  if(!is.null(Rj)) grid$Sum_Rj <- sapply(grid.pts, function(x) sum(points$Rj[x]))
   grid <- grid[grid$Counts>0,]
   if(!is.null(Rj)) grid$Mean_Rj <- grid$Sum_Rj/grid$Counts
 

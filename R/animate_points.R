@@ -1,8 +1,9 @@
 #' Title
 #'
 #' Descriptions Here
-#' @param mean mean.
+#' @param x x
 #' @param sd sd
+#' @param
 #' @keywords median
 #' @export
 #' @examples

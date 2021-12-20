@@ -21,7 +21,7 @@ animate_points(
 )
 }
 \arguments{
-\item{mean}{mean.}
+\item{x}{x}
 
 \item{sd}{sd}
 }

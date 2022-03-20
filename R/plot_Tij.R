@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-plot.Tij <- function(Tij,sf) {
+plot_Tij <- function(Tij,sf) {
   OD=melt(Tij,c("from","to"),value.name = "Tij")
   OD=subset(OD,from!=to & Tij>1)
   OD=od2line(OD,sf,zone_code='region')

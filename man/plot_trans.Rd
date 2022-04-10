@@ -4,7 +4,7 @@
 \alias{plot_trans}
 \title{Title}
 \usage{
-plot_trans(Rj, from = 1:200, to = 1:200)
+plot_trans(Rj, from = 1:200, to = 1:200, title = NULL)
 }
 \arguments{
 \item{mean}{mean.}

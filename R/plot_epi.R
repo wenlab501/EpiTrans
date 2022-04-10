@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-plot_epi <- function(t, interval = c("day","week","month")){
+plot_epi <- function(t, interval = c("day","week","month"), plot.points=NULL){
   require("ggplot2")
 
   if(length(interval)>2) interval <- interval[1]
@@ -22,6 +22,10 @@ plot_epi <- function(t, interval = c("day","week","month")){
     level.t <- unique(strftime(level.t,"%Y-%m"))
   }
 
+  if(is.null(plot.points)){
+    if(interval == "day") plot.points=F else plot.points=T
+  }
+
   t <- as.factor(t)
   levels(t) <- level.t
   data <- data.frame(xtabs(~t))
@@ -30,8 +34,9 @@ plot_epi <- function(t, interval = c("day","week","month")){
   xbrk <- round(seq(1,nrow(data),length.out = 6))
 
 
-  res <- ggplot(data) + geom_line(aes(x = date, y = Freq, group = 1),lwd=1) +
-    scale_x_continuous(breaks=xbrk, labels = data$t[xbrk])+
+  res <- ggplot(data) + geom_line(aes(x = date, y = Freq, group = 1),lwd=1)
+  if(plot.points) res <- res + geom_point(aes(x = date, y = Freq, group = 1))
+  res <- res +scale_x_continuous(breaks=xbrk, labels = data$t[xbrk])+
     xlab(paste("by",interval))+ylab("cases")+
     theme_minimal()
 

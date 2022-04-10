@@ -4,7 +4,17 @@
 \alias{plot_Rt}
 \title{Title}
 \usage{
-plot_Rt(t, Rt, Rt2 = NULL, interval = c("day", "week", "month"))
+plot_Rt(
+  t,
+  Rt,
+  Rt2 = NULL,
+  conf.level = 1,
+  interval = c("day", "week", "month"),
+  col = "orange",
+  col2 = "darkgreen",
+  label = "Rt",
+  label2 = "Rt2"
+)
 }
 \arguments{
 \item{mean}{mean.}

@@ -55,8 +55,8 @@ animate_points <- function(x, y, t, Rj = NULL, crs = NULL, bnd = NULL, basemap =
         tm_facets(along = "t")
   }
 
-  Map <- PointsMap +
-    BaseMap +
+  Map <- BaseMap+
+    PointsMap +
     tm_layout (title = title,legend.format=list(text.separator="~")) +
     tm_scale_bar()+
     tm_compass(position=c("left", "top"))

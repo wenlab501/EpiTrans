@@ -8,7 +8,7 @@ plot_Rt(
   t,
   Rt,
   Rt2 = NULL,
-  conf.level = 1,
+  percentile = c(0, 1),
   interval = c("day", "week", "month"),
   col = "orange",
   col2 = "darkgreen",

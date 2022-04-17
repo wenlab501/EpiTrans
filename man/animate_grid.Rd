@@ -19,7 +19,8 @@ animate_grid(
   width = 600,
   height = 400,
   delay = 50,
-  title = ""
+  title = "",
+  n.breaks = 6
 )
 }
 \arguments{

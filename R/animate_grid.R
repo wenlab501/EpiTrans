@@ -8,7 +8,7 @@
 #' @examples
 #' median_function(seq(1:10))
 
-animate_grid <- function(x, y, t, Rj = NULL,hex = FALSE, grid.n=50, crs = NULL, bnd = NULL, basemap = NULL, interval=c("day","week","month"), gridLonLat = TRUE, width = 600, height = 400, delay = 50, title=""){
+animate_grid <- function(x, y, t, Rj = NULL,hex = FALSE, grid.n=50, crs = NULL, bnd = NULL, basemap = NULL, interval=c("day","week","month"), gridLonLat = TRUE, width = 600, height = 400, delay = 50, title="", n.breaks=6){
   require("sf")
   require("tmap")
   require("tmaptools")
@@ -30,22 +30,31 @@ animate_grid <- function(x, y, t, Rj = NULL,hex = FALSE, grid.n=50, crs = NULL, 
   XY.data <- data.frame(x, y, t)
   if(!is.null(Rj)) XY.data$Rj <- Rj
   points <- createPoints(XY.data, crs, basemap)
-  points <- st_transform(points, 4326)
   points$t <- as.factor(points$t)
   levels(points$t) <- level.t
 
   # create grids
   box <- st_bbox(points)
   grid.length <- min(diff(box[c(1, 3)]),diff(box[c(2, 4)]))/grid.n
-
-
   grid <- st_make_grid(points, cellsize = grid.length, crs = crs,what = "polygons", square = !hex)
   grid <- st_sf(grid)
-  grid.pts <- st_contains(grid, points)
-  grid$Counts <- lengths(grid.pts)
-  if(!is.null(Rj)) grid$Sum_Rj <- sapply(grid.pts, function(x) sum(points$Rj[x]))
-  grid <- grid[grid$Counts>0,]
-  if(!is.null(Rj)) grid$Mean_Rj <- grid$Sum_Rj/grid$Counts
+
+  if(is.null(Rj)){
+    for(i in level.t) {
+      count=lengths(st_contains(grid, points[points$t==i,]))
+      count[count==0]=NA
+      grid[i]=count
+    }
+  }else{
+    for(i in level.t) {
+      grid.pts=st_contains(grid, points[points$t==i,])
+      count = lengths(st_contains(grid, points[points$t==i,]))
+      sum = sapply(grid.pts, function(x) sum(points$Rj[x]))
+      mean=sum/count
+      mean[count==0]=NA
+      grid[i]=mean
+    }
+  }
 
   #change CRS
   grid <- st_transform(grid, 4326)
@@ -56,23 +65,26 @@ animate_grid <- function(x, y, t, Rj = NULL,hex = FALSE, grid.n=50, crs = NULL, 
   # basemap
   BaseMap <- CreateBaseMap(basemap,bnd,gridLonLat,interact = FALSE, alphaGrid =.1)
 
+  #
+  grid.df = st_drop_geometry(grid)
+  grid.max = max(grid.df,na.rm=T)
+  breaks = ceiling(grid.max/n.breaks)*0:n.breaks
+
   #plotting
-  if(is.null(Rj)){
-    GridMap <- tm_shape(grid, bbox = bnd) +
-      tm_polygons(col = "Counts", n = 6, palette="YlOrRd", alpha = .6)+
-      tm_layout(legend.outside = TRUE, legend.outside.position = "right")+
-      tm_facets(along = "t")
-  }else{
-    GridMap <- tm_shape(grid, bbox = bnd) +
-      tm_polygons(col = "Mean_Rj", n = 8, palette="Oranges", alpha = .8)+
-      tm_layout(legend.outside = TRUE, legend.outside.position = "right")
+  Map.fun <- function(x) {
+    if(is.null(Rj)){
+      GridMap <- tm_shape(grid, bbox = bnd) +
+        tm_polygons(col = x, title = "Counts",border.col="NA",breaks = breaks,n = n.breaks, palette="YlOrRd", alpha = .6,colorNA ="NA",showNA=F)+
+        tm_layout(x,legend.format=list(text.separator="~"))
+    }else{
+      GridMap <- tm_shape(grid, bbox = bnd) +
+        tm_polygons(col = x, title = "Mean_Rj",border.col="NA",breaks = breaks,n = n.breaks, palette="YlOrRd", alpha = .6,colorNA ="NA",showNA=F)+
+        tm_layout(x,legend.format=list(text.separator="~"))
+    }
+    BaseMap+GridMap
   }
 
-  Map <- BaseMap +
-    GridMap +
-    tm_layout (title = title,legend.format=list(text.separator="~")) +
-    tm_scale_bar()
-
-
-  tmap_animation(Map, delay = delay)
+  map_animate  <-  lapply(level.t, Map.fun)
+  tmap_animation(map_animate, width = width, height = height,delay = delay)
 }
+

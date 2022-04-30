@@ -47,7 +47,7 @@ plot_kde <- function(x, y, grid.n=50, bandwidth=NULL, crs = NULL, bnd = NULL, ba
 
   #plotting
   KDEMap <- tm_shape(kde) +
-    tm_polygons("KDE",palette=rev(heat.colors(10)),alpha=.8,n=8,border.alpha=0) +
+    tm_polygons("KDE",palette=RColorBrewer::brewer.pal(9,"Reds"),alpha=.8,n=8,border.alpha=0) +
     tm_layout(legend.outside = TRUE, legend.outside.position = "right")
 
   Map <- BaseMap +

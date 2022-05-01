@@ -32,7 +32,8 @@
 	</div>
   </body>
   <script>
-  var function_name ="animate_grid";
+  var url = window.location.pathname;
+  var function_name = url.substring(url.lastIndexOf('/')+1, url.length-5);
 
   $("title").html(function_name);
   $("h2").html(function_name);

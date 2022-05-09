@@ -1,0 +1,13 @@
+data_name,column_id,column_name,type,meaning
+dengue,1,date,Date,
+dengue,2,long,numeric,
+dengue,3,lat,numeric,
+covid19,1,region,character,
+covid19,2,date,Date,
+RndPts,1,region,character,
+RndPts,2,x,numeric,
+RndPts,3,y,numeric,
+Taipei,1,region,character,
+Taipei,2,geometry,sfc,
+Taiwan,1,town.moi,character,
+Taiwan,2,geometry,sfc,

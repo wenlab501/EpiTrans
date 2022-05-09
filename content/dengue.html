@@ -15,12 +15,11 @@
     <a href="../content.html"><button>← Back to Content</button></a>
 
       <h2></h2>
-			<table class='table' id='table'>
+			<table class='table'>
 				<thead>
 					<tr>
-						<th>argument_name</th>
-						<th>default</th>
-            <th>data_type</th>
+						<th>column_name</th>
+            <th>type</th>
 						<th>meaning</th>
 					</tr>
 				</thead>
@@ -55,29 +54,35 @@
     h2{
       margin-top:20px;
     }
+
+    sfc, Date, character, numeric{border-radius:10%;padding:0 3px 0 3px;}
+    .red, sfc {background-color:rgba(255,0,26,0.2);}
+    .yellow, Date {background-color:rgba(233,168,0,0.2)}
+    .green, character {background-color:rgba(0,135,107,0.2)}
+    .blue, numeric {background-color:rgba(0,120,223,0.2)}
   </style>
   <script>
   var url = window.location.pathname;
-  var function_name = url.substring(url.lastIndexOf('/')+1, url.length-5);
+  var dataset_name = url.substring(url.lastIndexOf('/')+1, url.length-5);
 
-  $("title").html(function_name);
-  $("h2").html(function_name);
+  $("title").html(dataset_name);
+  $("h2").html(dataset_name);
 
   $.ajax({
       type: "GET",
-      url: "https://raw.githubusercontent.com/wenlab501/EpiTrans/main/content/functions_arg.csv",
+      url: "https://raw.githubusercontent.com/wenlab501/EpiTrans/main/content/datasets_col.csv",
       success: function (data) {
         data=Papa.parse(data).data;
+        console.log(data.length)
 
         for (var i = 1; i < data.length-1; i++) {
           row=data[i];
 
-          if (row[0]==function_name){
+          if (row[0]==dataset_name){
 
           let txt = '<tr>'+'<td><B><U>'+row[2]+'</U></B></td>'+
-                  '<td>'+row[3]+'</td>'+
+                  '<td><'+row[3]+'>'+row[3]+'</'+row[3]+'></td>'+
                   '<td>'+row[4]+'</td>'+
-                  '<td>'+row[5]+'</td>'+
                 '</tr>';
 
           $('tbody').append(txt);}

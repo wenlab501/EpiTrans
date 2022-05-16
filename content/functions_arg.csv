@@ -3,7 +3,7 @@ animate_grid,1,x,,numeric,vector of x coordinates of data points
 animate_grid,2,y,,numeric,vector of y coordinates of data points
 animate_grid,3,t,,"numeric, or 'Date'",vector of time of data points
 animate_grid,4,Rj,NULL,numeric,vector of individual reproductive numbers of data points
-animate_grid,5,hex,FALSE,logical,"logical; if?TRUE, create hexagonal grid ; if?FALSE, create square grid"
+animate_grid,5,hex,FALSE,logical,"logical; if'TRUE', create hexagonal grid ; if'FALSE', create square grid"
 animate_grid,6,grid.n,50,numeric,number of grid cells in one direction (shorter side)
 animate_grid,7,crs,NULL,numeric (EPSG code) or object of class 'crs',"coordinate reference system of  data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326)"
 animate_grid,8,bnd,NULL,numeric,"A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map."
@@ -52,14 +52,14 @@ GeoLocater,1,TimeDF,,data.frame,"data frame of points regarding time;must contai
 GeoLocater,2,PointsDF,,data.frame,"data frame (regarding space) of population points or random points in polygons; must contain a column of place (region, polygon name) called 'region', and a column of x coordinate called 'x', and a column of y coordinate called 'y'"
 lpdf_GI,1,mean,20,numeric,mean of the probability distribution of generation interval
 lpdf_GI,2,sd,9,numeric,standard deviation of the probability distribution of generation interval
-lpdf_SW,1,mean,125,numeric,mean tranmission distance of exponential distribution 
+lpdf_SW,1,mean,125,numeric,mean tranmission distance of exponential distribution
 plot_epi,1,t,,"numeric, or 'Date'",vector of time of data points
 plot_epi,2,interval,"c(""day"", ""week"", ""month"")",character,"character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month"
 plot_epi,3,plot.points,NULL,logical,logical; if TRUE points of line chart will be marked
 plot_grid,1,x,,numeric,vector of x coordinates of data points
 plot_grid,2,y,,numeric,vector of y coordinates of data points
 plot_grid,3,Rj,NULL,numeric,vector of individual reproductive numbers of data points
-plot_grid,4,hex,FALSE,logical,"logical; if?TRUE, create hexagonal grid ; if?FALSE, create square grid"
+plot_grid,4,hex,FALSE,logical,"logical; if'TRUE', create hexagonal grid ; if'FALSE', create square grid"
 plot_grid,5,grid.n,50,numeric,number of grid cells in one direction (shorter side)
 plot_grid,6,crs,NULL,numeric (EPSG code) or object of class 'crs',"coordinate reference system of  data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326)"
 plot_grid,7,bnd,NULL,numeric,"A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map."
@@ -91,7 +91,7 @@ plot_lpdf_GI,1,mean,20,numeric,mean of the probability distribution of generatio
 plot_lpdf_GI,2,sd,9,numeric,standard deviation of the probability distribution of generation interval
 plot_lpdf_GI,3,from,0,numeric,minimum of x of the plot
 plot_lpdf_GI,4,to,50,numeric,maximum of x of the plot
-plot_lpdf_SW,1,mean,125,numeric,mean tranmission distance of exponential distribution 
+plot_lpdf_SW,1,mean,125,numeric,mean tranmission distance of exponential distribution
 plot_lpdf_SW,2,from,0,numeric,minimum of x of the plot
 plot_lpdf_SW,3,to,1000,numeric,maximum of x of the plot
 plot_points,1,x,,numeric,vector of x coordinates of data points
@@ -108,7 +108,7 @@ plot_polygons,1,region,,character,vector of region (polygon) name of data points
 plot_polygons,2,sf,,object of class 'sf',object of class 'sf'; polygon layer of statistical data (region data of these data points)
 plot_polygons,3,interact,TRUE,logical,"logical; if TRUE, plot thematic interactive map; if FALSE,  static plotting non-interactive thematic map"
 plot_polygons,4,gridLonLat,TRUE,logical,logical; draw latitude and longitude grid on non-interactive map
-plot_reigonTrans,1,Pij,,matrix,matrix of individual transmission probablity from case i to case j  
+plot_reigonTrans,1,Pij,,matrix,matrix of individual transmission probablity from case i to case j
 plot_reigonTrans,2,region,,character,vector of region (polygon) name of data points
 plot_reigonTrans,3,sf,,object of class 'sf',object of class 'sf'; polygon layer of statistical data (region data of these data points)
 plot_reigonTrans,4,time,NULL,"numeric, or 'Date'",vector of time of data points
@@ -127,7 +127,7 @@ plot_trans,1,Rj,,list,input the result of 'Rj'; a list must contain a matrix of 
 plot_trans,2,from,0.180555556,numeric,"origin of transmission, y-axis on the plot "
 plot_trans,3,to,0.180555556,numeric,"destination of transmission, x-axis on the plot"
 plot_trans,4,title,NULL,character,main title of plot
-ReduceMatrix,1,matrix,,matrix,matrix of individual transmission probablity from case i to case j 
+ReduceMatrix,1,matrix,,matrix,matrix of individual transmission probablity from case i to case j
 ReduceMatrix,2,group,,character,"vector of grouop, or region(polygon) of cases"
 Rj,1,t,,"numeric, or 'Date'",vector of time of data points
 Rj,2,x,,numeric,vector of x coordinates of data points

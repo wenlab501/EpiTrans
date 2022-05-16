@@ -1,13 +1,13 @@
 data_name,column_id,column_name,type,meaning
-dengue,1,date,Date,
-dengue,2,long,numeric,
-dengue,3,lat,numeric,
-covid19,1,region,character,
-covid19,2,date,Date,
-RndPts,1,region,character,
-RndPts,2,x,numeric,
-RndPts,3,y,numeric,
-Taipei,1,region,character,
-Taipei,2,geometry,sfc,
-Taiwan,1,town.moi,character,
-Taiwan,2,geometry,sfc,
+dengue,1,date,Date,onset date of dengue cases 
+dengue,2,long,numeric,longitude of dengue cases 
+dengue,3,lat,numeric,latitude of dengue cases 
+covid19,1,region,character,spatial region of COVID-19 cases
+covid19,2,date,Date,onset date of COVID-19 cases
+RndPts,1,region,character,spatial region of random sampling population points
+RndPts,2,x,numeric,x coordinate of random sampling population points (TWD97/TM2 zone 121)
+RndPts,3,y,numeric,y coordinate of random sampling population points (TWD97/TM2 zone 121)
+Taipei,1,region,character,names of districts in Taipei
+Taipei,2,geometry,sfc,polygon geometry of districts in Taipei
+Taiwan,1,town.moi,character,MOI code number of towns in Taiwan
+Taiwan,2,geometry,sfc,polygon geometry of towns in Taiwan

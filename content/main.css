@@ -41,6 +41,11 @@ button:hover {
 		background-color:rgb(255, 179, 179,0.3);
 }
 
+#green{
+	background-color: rgba(120,180,120,0.1);
+	border: solid 1px green;
+	color: green;/**/
+}
 
 /*===============================================================*/
 

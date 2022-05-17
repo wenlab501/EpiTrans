@@ -1,11 +1,11 @@
 Package: EpiTrans
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R package for estimation of epidemic transmissibility in time and space
 Version: 0.1.0
-Author: Who wrote it
+Author: Chen-Hsuan Tu, Ta-Chou Ng, Tzai-Hung Wen
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: R package for estimation of epidemic transmissibility in time and space
+Depends: R (>= 3.5.0)
 License: What license is it under?
 Imports: Matrix, ggplot2, sf, gganimate, gifski, png, transformr, dplyr, tmap, reshape2, stplanr, SpatialKDE, tmaptools
 Encoding: UTF-8

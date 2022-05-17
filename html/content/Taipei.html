@@ -70,7 +70,7 @@
 
   $.ajax({
       type: "GET",
-      url: "https://raw.githubusercontent.com/wenlab501/EpiTrans/main/content/datasets_col.csv",
+      url: "https://raw.githubusercontent.com/wenlab501/EpiTrans/main/html/content/datasets_col.csv",
       success: function (data) {
         data=Papa.parse(data).data;
         console.log(data.length)

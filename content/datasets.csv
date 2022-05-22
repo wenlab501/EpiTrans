@@ -1,6 +1,0 @@
-data_id,data_name,data_type,meaning
-1,dengue,data.frame,dengue fever cases in Tainan 
-2,covid19,data.frame,COVID-19 cases by district in Taipei Metropolitan Area
-3,RndPts,data.frame,random points standing for popuation in Taipei Metropolitan Area
-4,Taipei,data.frame; sf,polygon layer of district Taipei Metropolitan Area
-5,Taiwan,data.frame; sf,polygon layer of town in Taiwan

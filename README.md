@@ -1,5 +1,5 @@
 # EpiTrans
-### An R package for estimating epidemic transmissibility in time and space
+### An R package for estimating Epidemic Transmissibility in time and space
 
 ---
 

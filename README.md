@@ -20,5 +20,5 @@ The package is available from Github. You can install the nightly build using th
 ## Tutorial
 Click to see → [Tutorial](https://wenlab501.github.io/EpiTrans/html/tutorial.html)
 
-## Content of functions and datasets
+## Functions and datasets
 Click to see → [Content](https://wenlab501.github.io/EpiTrans/html/content.html)

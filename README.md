@@ -16,7 +16,7 @@ The package is available from Github. You can install the nightly build using th
 > install_github("wenlab501/EpiTrans")     
 
 ## Tutorial
-Click to see → [Tutorial](https://https://wenlab501.github.io/EpiTrans/html/tutorial.html)
+Click to see → [Tutorial](https://wenlab501.github.io/EpiTrans/html/tutorial.html)
 
 ## Content of functions and datasets
 Click to see → [Content](https://wenlab501.github.io/EpiTrans/html/content.html)

@@ -1,6 +1,6 @@
 # EpiTrans
 ### An R package for estimating Epidemic Transmissibility in time and space
-
+contact: Tzai-Hung Wen, National Taiwan University (wenthung@ntu.edu.tw)
 ---
 
 ## Introduction

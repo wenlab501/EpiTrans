@@ -1,7 +1,9 @@
 # EpiTrans
 ### An R package for estimating Epidemic Transmissibility in time and space
-contact: Tzai-Hung Wen, National Taiwan University (wenthung@ntu.edu.tw)
+
 ---
+contributors: Chen-Hsuan Tu, Ta-Chou Ng, and Tzai-Hung Wen
+contact: Tzai-Hung Wen, National Taiwan University (wenthung@ntu.edu.tw)
 
 ## Introduction
 The package, EpiTrans, provides a new method for quantifying spatially adjusted (time-varying) reproductive numbers that reflects spatial heterogeneity in transmission potential among individuals. This method estimates individual-level effective reproductive numbers and a summarized indicator for population-level time-varying reproductive number.

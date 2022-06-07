@@ -2,7 +2,7 @@
 ### An R package for estimating Epidemic Transmissibility in time and space
 
 ---
-contributors: Chen-Hsuan Tu, Ta-Chou Ng, and Tzai-Hung Wen
+contributors: Chen-Hsuan Tu, Ta-Chou Ng, and Tzai-Hung Wen <br>
 contact: Tzai-Hung Wen, National Taiwan University (wenthung@ntu.edu.tw)
 
 ## Introduction

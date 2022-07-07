@@ -2,17 +2,19 @@
 % Please edit documentation in R/lpdf_SW.R
 \name{lpdf_SW}
 \alias{lpdf_SW}
-\title{Title}
+\title{Calculate probability distribution of tranmission distance}
 \usage{
 lpdf_SW(mean = 125)
 }
 \arguments{
-\item{mean}{mean.}
+\item{mean}{Mean tranmission distance of exponential distribution}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Spatial weighting function; probability distribution (exponential distribution) of tranmission distance
 }
 \examples{
-median_function(seq(1:10))
+lpdf_SW(mean = 125)
 }
-\keyword{median}

@@ -2,19 +2,27 @@
 % Please edit documentation in R/distLongLat.R
 \name{distLongLat}
 \alias{distLongLat}
-\title{Title}
+\title{Calculate geometry distance}
 \usage{
 distLongLat(lon, lat)
 }
 \arguments{
-\item{lon}{mean.}
+\item{lon}{Vector of longitude; its length stands for the number of points.}
 
-\item{lat}{sd}
+\item{lat}{Vector of latitude; its length stands for the number of points.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Calculate distance of longtitude and latitude
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+lon <- covid$x[1:100]
+lat <- covid$y[1:100]
+
+distLongLat(lon,lat)
 }
-\keyword{median}

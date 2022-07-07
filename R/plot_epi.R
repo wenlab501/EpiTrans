@@ -1,15 +1,27 @@
-#' Title
+#' Draw the epidemic curve
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Plot epidemic curve (time series of incident cases); epidemic curve (time series of incident cases) is the most common way to characterize temporal pattern of an outbreak.
+#'
+#' @param t Vector of time of data points.
+#' @param interval Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.
+#' @param plot.points Logical; if TRUE points of line chart will be marked.
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#'
+#' plot_epi(t = dengue$date, interval ="week")
+#' @import ggplot2
+#' @export
 
 plot_epi <- function(t, interval = c("day","week","month"), plot.points=NULL){
-  require("ggplot2")
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop(
+      "Package \"ggplot2\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   if(length(interval)>2) interval <- interval[1]
   date.diff=as.numeric(max(t)-min(t))

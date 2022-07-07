@@ -2,19 +2,27 @@
 % Please edit documentation in R/plot_reigonTrans.R
 \name{plot_reigonTrans}
 \alias{plot_reigonTrans}
-\title{Title}
+\title{Visualizing Town Level Reproductive Numbers}
 \usage{
 plot_reigonTrans(Pij, region, sf, time = NULL)
 }
 \arguments{
-\item{mean}{mean.}
+\item{Pij}{Matrix of individual transmission probablity from case i to case j.}
 
-\item{sd}{sd}
+\item{region}{Vector of region (polygon) name of data points.}
+
+\item{sf}{Object of class 'sf'; polygon layer of statistical data (region data of these data points).}
+
+\item{time}{Vector of time of data points.}
 }
 \description{
-Descriptions Here
+Plot regional transmission relationship map by individual transmission probablity matrix
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+covid.R_adj=Rj(t = covid$date, x = covid$x, y = covid$y, GI.pdf = lpdf_GI(5.2,1.5), unit_coord = "meter")
+
+plot_reigonTrans(Pij = covid.R_adj$Pij,region = covid$region,sf = Taipei)
 }
-\keyword{median}

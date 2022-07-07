@@ -2,19 +2,22 @@
 % Please edit documentation in R/plot_lpdf_GI.R
 \name{plot_lpdf_GI}
 \alias{plot_lpdf_GI}
-\title{Title}
+\title{Visualizing probability density functions.}
 \usage{
 plot_lpdf_GI(mean = 20, sd = 9, from = 0, to = 50)
 }
 \arguments{
-\item{mean}{mean.}
+\item{mean}{Mean of the probability distribution of generation interval.}
 
-\item{sd}{sd}
+\item{sd}{Standard deviation of the probability distribution of generation interval.}
+
+\item{from}{Minimum of x of the plot.}
+
+\item{to}{Maximum of x of the plot.}
 }
 \description{
-Descriptions Here
+Plot the probability distribution of generation interval
 }
 \examples{
-median_function(seq(1:10))
+plot_lpdf_GI(mean = 20, sd = 9 ,from = 0, to = 50)
 }
-\keyword{median}

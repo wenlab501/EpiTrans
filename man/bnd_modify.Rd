@@ -2,19 +2,21 @@
 % Please edit documentation in R/bnd_modify.R
 \name{bnd_modify}
 \alias{bnd_modify}
-\title{Title}
+\title{Adjust the boundary of the plot map}
 \usage{
 bnd_modify(sf)
 }
 \arguments{
-\item{mean}{mean.}
+\item{sf}{Object of class 'sf'.}
+}
+\value{
 
-\item{sd}{sd}
 }
 \description{
-Descriptions Here
+Auto adjust the boundary of the plot map
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+bnd <- bnd_modify(Taiwan)
 }
-\keyword{median}

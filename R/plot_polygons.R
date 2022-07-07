@@ -1,18 +1,50 @@
-#' Title
+#' Draw Choropleth map
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Plot chorolepth map of cases by grouping region
+#'
+#' @param region Vector of region (polygon) name of data points.
+#' @param sf Object of class 'sf'; polygon layer of statistical data (region data of these data points).
+#' @param interact Logical; if TRUE, plot thematic interactive map; if FALSE, static plotting non-interactive thematic map.
+#' @param gridLonLat Logical; draw latitude and longitude grid on non-interactive map.
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#'
+#' covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+#'
+#' plot_polygons(region = covid$region,sf = Taipei)
+#' @import dplyr
+#' @import sf
+#' @import tmap
+#' @import tmaptools
+#' @export
 
 plot_polygons=function(region, sf, interact = TRUE, gridLonLat = TRUE){
-  require("sf")
-  require("tmap")
-  require("tmaptools")
-  require("dplyr")
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    stop(
+      "Package \"sf\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmap", quietly = TRUE)) {
+    stop(
+      "Package \"tmap\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmaptools", quietly = TRUE)) {
+    stop(
+      "Package \"tmaptools\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop(
+      "Package \"dplyr\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   if(interact) tmap_mode("view") else tmap_mode("plot")
 

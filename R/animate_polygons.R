@@ -1,19 +1,65 @@
-#' Title
+#' Visualizing the spatio-temporal pattern of choropleth map
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Generate animation of chorolepth map of cases by grouping region
+#'
+#' @param region Vector of region (polygon) name of data points.
+#' @param t Vector of time of data points.
+#' @param sf Object of class 'sf'; polygon layer of statistical data (region data of these data points).
+#' @param interval Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.
+#' @param breaks Numeric vector to tell how chorolepth classify.
+#' @param gridLonLat Logical; draw latitude and longitude grid on non-interactive map.
+#' @param width Width of the animation file (in pixels).
+#' @param height Height of the animation file (in pixels).
+#' @param delay Delay time between images (in 1/100th of a second).
+#' @return
+#'
+
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#' covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+#'
+#' animate_polygons(region = covid$region,t = covid$date,sf = Taipei)
+#' @import dplyr
+#' @import reshape2
+#' @import sf
+#' @import tmap
+#' @import tmaptools
+#' @export
+#'
 
 animate_polygons <- function(region, t, sf, interval=c("day","week","month"), breaks = NULL, gridLonLat = TRUE, width = 600, height = 400, delay = 50){
-  require("sf")
-  require("tmap")
-  require("tmaptools")
-  require("dplyr")
-  require("reshape2")
+
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    stop(
+      "Package \"sf\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmap", quietly = TRUE)) {
+    stop(
+      "Package \"tmap\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmaptools", quietly = TRUE)) {
+    stop(
+      "Package \"tmaptools\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop(
+      "Package \"dplyr\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("reshape2", quietly = TRUE)) {
+    stop(
+      "Package \"reshape2\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   if(length(interval)>2) interval <- interval[1]
   date.diff=as.numeric(max(t)-min(t))
@@ -21,7 +67,7 @@ animate_polygons <- function(region, t, sf, interval=c("day","week","month"), br
   if(interval=="week"){
     t <- strftime(t,"%Y-%W")
     level.t <- unique(strftime(level.t,"%Y-%W"))
-  }else if(interval=="month"){
+  }else if(interval=="mXonth"){
     t <- strftime(t,"%Y-%m")
     level.t <- unique(strftime(level.t,"%Y-%m"))
   }

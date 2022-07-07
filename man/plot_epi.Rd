@@ -2,19 +2,25 @@
 % Please edit documentation in R/plot_epi.R
 \name{plot_epi}
 \alias{plot_epi}
-\title{Title}
+\title{Draw the epidemic curve}
 \usage{
 plot_epi(t, interval = c("day", "week", "month"), plot.points = NULL)
 }
 \arguments{
-\item{mean}{mean.}
+\item{t}{Vector of time of data points.}
 
-\item{sd}{sd}
+\item{interval}{Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.}
+
+\item{plot.points}{Logical; if TRUE points of line chart will be marked.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Plot epidemic curve (time series of incident cases); epidemic curve (time series of incident cases) is the most common way to characterize temporal pattern of an outbreak.
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+plot_epi(t = dengue$date, interval ="week")
 }
-\keyword{median}

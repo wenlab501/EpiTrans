@@ -1,17 +1,47 @@
-#' Title
+#' Visualizing Point pattern
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Plot the spatial points of cases; point pattern is the most direct and exact way to visualize spatial pattern of an outbreak.
+#'
+#' @param x Vector of x coordinates of data points.
+#' @param y Vector of y coordinates of data points.
+#' @param t Vector of time of data points.
+#' @param Rj Vector of individual reproductive numbers of data points.
+#' @param crs Coordinate reference system of data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326).
+#' @param bnd A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map.
+#' @param basemap Object of class 'sf'; basemap plotting on map.
+#' @param interact Logical; if TRUE, plot thematic interactive map; if FALSE, static plotting non-interactive thematic map.
+#' @param gridLonLat Logical; draw latitude and longitude grid on non-interactive map.
+#' @param title Main title of plot.
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#'
+#' plot_points(x = dengue$long, y= dengue$lat, crs= NULL,basemap = Taiwan)
+#' @import sf
+#' @import tmap
+#' @import tmaptools
+#' @export
 
 plot_points <- function(x, y, t = NULL, Rj = NULL, crs = NULL, bnd = NULL, basemap = NULL, interact = TRUE, gridLonLat = TRUE, title = ""){
-  require("sf")
-  require("tmap")
-  require("tmaptools")
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    stop(
+      "Package \"sf\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmap", quietly = TRUE)) {
+    stop(
+      "Package \"tmap\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("tmaptools", quietly = TRUE)) {
+    stop(
+      "Package \"tmaptools\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   if(interact) tmap_mode("view") else tmap_mode("plot")
   if(is.null(crs)) crs <- 4326

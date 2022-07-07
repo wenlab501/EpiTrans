@@ -2,19 +2,21 @@
 % Please edit documentation in R/lpdf_GI.R
 \name{lpdf_GI}
 \alias{lpdf_GI}
-\title{Title}
+\title{Calculate the probability distribution of generation interval}
 \usage{
 lpdf_GI(mean = 20, sd = 9)
 }
 \arguments{
-\item{mean}{mean.}
+\item{mean}{Mean of the probability distribution of generation interval.}
 
-\item{sd}{sd}
+\item{sd}{Standard deviation of the probability distribution of generation interval.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Probability distribution (gamma distribution) of generation interval, defined as the time interval between the infection (or onset) time of infector and infectee.
 }
 \examples{
-median_function(seq(1:10))
+lpdf_GI(mean = 20,sd = 9)
 }
-\keyword{median}

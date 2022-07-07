@@ -1,11 +1,13 @@
-#' Title
+#' Calculate probability distribution of tranmission distance
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @keywords median
-#' @export
+#' Spatial weighting function; probability distribution (exponential distribution) of tranmission distance
+#'
+#' @param mean Mean tranmission distance of exponential distribution
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' lpdf_SW(mean = 125)
+#' @export
 
 lpdf_SW <- function(mean = 125){
   function(x) dexp(x, rate = 1/mean, log = T)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_grid.R
 \name{plot_grid}
 \alias{plot_grid}
-\title{Title}
+\title{Visualizing Point pattern}
 \usage{
 plot_grid(
   x,
@@ -19,14 +19,36 @@ plot_grid(
 )
 }
 \arguments{
-\item{mean}{mean.}
+\item{x}{Vector of x coordinates of data points.}
 
-\item{sd}{sd}
+\item{y}{Vector of y coordinates of data points.}
+
+\item{Rj}{Vector of individual reproductive numbers of data points.}
+
+\item{hex}{Logical; if'TRUE', create hexagonal grid ; if'FALSE', create square grid.}
+
+\item{grid.n}{Number of grid cells in one direction (shorter side).}
+
+\item{crs}{Coordinate reference system of data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326).}
+
+\item{bnd}{A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map.}
+
+\item{basemap}{Object of class 'sf'; basemap plotting on map.}
+
+\item{interact}{Logical; if TRUE, plot thematic interactive map; if FALSE, static plotting non-interactive thematic map.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
+
+\item{title}{Main title of plot.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Plot the spatial pattern of cases by grid; aggregate the point into specified grids
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+plot_grid(x = dengue$long, y= dengue$lat, grid.n=30, basemap = Taiwan)
 }
-\keyword{median}

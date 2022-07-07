@@ -1,15 +1,36 @@
-#' Title
+#' Visualizing Time-varying reproductive numbers
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Plot line chart of individual reproductive numbers by time
+#'
+#' @param t Vector of time of data points.
+#' @param Rt Vector of individual reproductive numbers of data points, stand for Rt1.
+#' @param Rt2 Another vector of individual reproductive numbers of data points to compare, stand for Rt2.
+#' @param percentile A 2-length numerical vector, draw the area of value of percentile range; if c(0,1) means min and max will be drawn, c(0.05,0.95) means the middle 90 percent value will be drawn.
+#' @param interval Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.
+#' @param col Color of line Rt1.
+#' @param col2 Color of line Rt2.
+#' @param label Label of line Rt1.
+#' @param label2 Label of line Rt2.
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#'
+#' covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+#' covid.R_adj=Rj(t = covid$date, x = covid$x, y = covid$y, GI.pdf = lpdf_GI(5.2,1.5), unit_coord = "meter")
+#'
+#' plot_Rt(t = covid$date, Rt=covid.R_adj$Rj, Rt2=covid.R_adj$Rj,percentile = c(.025,.975))
+#' @import ggplot2
+#' @export
 
 plot_Rt <- function(t, Rt, Rt2=NULL, percentile=c(0,1), interval = c("day","week","month"), col="orange",col2="darkgreen",label="Rt",label2="Rt2"){
-  require("ggplot2")
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop(
+      "Package \"ggplot2\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   if(length(interval)>2) interval <- interval[1]
   date.diff=as.numeric(max(t)-min(t))

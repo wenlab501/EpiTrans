@@ -2,19 +2,29 @@
 % Please edit documentation in R/CreateBaseMap.R
 \name{CreateBaseMap}
 \alias{CreateBaseMap}
-\title{Title}
+\title{Create base map}
 \usage{
 CreateBaseMap(basemap, bnd, gridLonLat, interact, alphaGrid = 1)
 }
 \arguments{
-\item{mean}{mean.}
+\item{basemap}{Object of class 'sf'; basemap plotting on map}
 
-\item{sd}{sd}
+\item{bnd}{A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
+
+\item{interact}{Logical; if TRUE, plot thematic interactive map; if FALSE, static plotting non-interactive thematic map.}
+
+\item{alphaGrid}{0~1; transparency number between 0 (totally transparent) and 1 (not transparent).}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Create different type of base map on plot
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+CreateBaseMap(Taiwan,bnd = bnd_modify(Taiwan),gridLonLat = TRUE,interact = TRUE,alphaGrid = 1)
 }
-\keyword{median}

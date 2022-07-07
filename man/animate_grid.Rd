@@ -2,7 +2,7 @@
 % Please edit documentation in R/animate_grid.R
 \name{animate_grid}
 \alias{animate_grid}
-\title{Title}
+\title{Visualizing the spatio-temporal pattern of an outbreak’s transmision potential}
 \usage{
 animate_grid(
   x,
@@ -24,14 +24,51 @@ animate_grid(
 )
 }
 \arguments{
-\item{mean}{mean.}
+\item{x}{Vector of x coordinates of data points.}
 
-\item{sd}{sd}
+\item{y}{Vector of y coordinates of data points.}
+
+\item{t}{Vector of time of data points.}
+
+\item{Rj}{Vector of individual reproductive numbers of data points.}
+
+\item{hex}{Logical; if'TRUE', create hexagonal grid ; if'FALSE', create square grid.}
+
+\item{grid.n}{Number of grid cells in one direction (shorter side).}
+
+\item{crs}{Coordinate reference system of data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326).}
+
+\item{bnd}{A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map.}
+
+\item{basemap}{Object of class 'sf'; basemap plotting on map.}
+
+\item{interval}{Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
+
+\item{width}{Width of the animation file (in pixels).}
+
+\item{height}{Height of the animation file (in pixels).}
+
+\item{delay}{Delay time between images (in 1/100th of a second).}
+
+\item{title}{Main title of animation.}
+
+\item{n.breaks}{Number of classify classes.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Generate animation of the spatial pattern of cases by grid; aggregate the point into specified grids
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+res_adj = Rj(t = dengue$date, x = dengue$long, y = dengue$lat,GI.pdf = lpdf_GI(),SW.pdf = lpdf_SW(), adjSP = TRUE)
+dengue$Rj = res_adj$Rj
+dengue = dengue[dengue$date > as.Date("2007-09-15") & dengue$date < as.Date("2007-10-15"),]
+
+
+animate_grid(x=dengue$long, y=dengue$lat, t=dengue$date, Rj = dengue$Rj, grid.n=20, hex = TRUE, basemap = Taiwan, interval="week")
 }
-\keyword{median}

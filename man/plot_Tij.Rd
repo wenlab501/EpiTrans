@@ -2,19 +2,28 @@
 % Please edit documentation in R/plot_Tij.R
 \name{plot_Tij}
 \alias{plot_Tij}
-\title{Title}
+\title{Visualizing Town Level Reproductive Numbers}
 \usage{
 plot_Tij(Tij, sf)
 }
 \arguments{
-\item{mean}{mean.}
+\item{Tij}{Matrix of transmission probablity between regions}
 
-\item{sd}{sd}
+\item{sf}{Object of class 'sf'; polygons of region data}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Plot regional transmission relationship map by transmission probablity matrix
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+covid.R_adj=Rj(t = covid$date, x = covid$x, y = covid$y, GI.pdf = lpdf_GI(5.2,1.5), unit_coord = "meter")
+
+Tij = ReduceMatrix(covid.R_adj$Pij,covid$region)
+
+plot_Tij(Tij = Tij, sf = Taipei)
 }
-\keyword{median}

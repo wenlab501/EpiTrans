@@ -2,17 +2,13 @@
 % Please edit documentation in R/EpiTransLibrary.R
 \name{EpiTransLibrary}
 \alias{EpiTransLibrary}
-\title{A Self-made Median Function 2}
+\title{Pre-run package dependencies}
 \usage{
 EpiTransLibrary()
 }
-\arguments{
-\item{x}{A numeric vector.}
-}
 \description{
-This function allows you to calculate the median from a numeric vector.
+Pre-run package dependencies of EpiTrans
 }
 \examples{
-median_function(seq(1:10))
+EpiTransLibrary()
 }
-\keyword{median}

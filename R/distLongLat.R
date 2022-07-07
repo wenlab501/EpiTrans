@@ -1,13 +1,20 @@
-#' Title
+#' Calculate geometry distance
 #'
-#' Descriptions Here
-#' @param lon mean.
-#' @param lat sd
-#' @keywords median
-#' @export
+#' Calculate distance of longtitude and latitude
+#'
+#' @param lon Vector of longitude; its length stands for the number of points.
+#' @param lat Vector of latitude; its length stands for the number of points.
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
-
+#' data("EpiTrans")
+#'
+#' covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+#' lon <- covid$x[1:100]
+#' lat <- covid$y[1:100]
+#'
+#' distLongLat(lon,lat)
+#' @export
 distLongLat <- function(lon,lat) {
   N <- length(lon)
   x <- as.numeric(lon)*pi/180

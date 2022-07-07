@@ -1,11 +1,10 @@
-#' A Self-made Median Function 2
+#' Pre-run package dependencies
 #'
-#' This function allows you to calculate the median from a numeric vector.
-#' @param x A numeric vector.
-#' @keywords median
+#' Pre-run package dependencies of EpiTrans
+#' 
 #' @export
 #' @examples
-#' median_function(seq(1:10))
+#' EpiTransLibrary()
 
 EpiTransLibrary <- function() {
   library("Matrix")

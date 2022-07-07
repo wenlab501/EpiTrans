@@ -2,7 +2,7 @@
 % Please edit documentation in R/animate_points.R
 \name{animate_points}
 \alias{animate_points}
-\title{Title}
+\title{Visualizing the spatio-temporal pattern of an outbreak’s transmision potential}
 \usage{
 animate_points(
   x,
@@ -21,14 +21,44 @@ animate_points(
 )
 }
 \arguments{
-\item{x}{x}
+\item{x}{Vector of x coordinates of data points.}
 
-\item{sd}{sd}
+\item{y}{Vector of y coordinates of data points.}
+
+\item{t}{Vector of time of data points.}
+
+\item{Rj}{Vector of individual reproductive numbers of data points.}
+
+\item{crs}{Coordinate reference system of data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326).}
+
+\item{bnd}{A 4-length numerical vector of the form c(xmin, ymin, xmax, ymax) which gives the number of x and y coordinates' ranges of the map.}
+
+\item{basemap}{Object of class 'sf'; basemap plotting on map.}
+
+\item{interval}{Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
+
+\item{width}{Width of the animation file (in pixels).}
+
+\item{height}{Height of the animation file (in pixels).}
+
+\item{delay}{Delay time between images (in 1/100th of a second).}
+
+\item{title}{Main title of animation.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Generate animation of the spatial points of cases; point pattern is the most direct and exact way to visualize spatial pattern of an outbreak.
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+res_adj = Rj(t = dengue$date, x = dengue$long, y = dengue$lat,GI.pdf = lpdf_GI(),SW.pdf = lpdf_SW(), adjSP = TRUE)
+dengue$Rj = res_adj$Rj
+dengue = dengue[dengue$date > as.Date("2007-09-15") & dengue$date < as.Date("2007-10-15"),]
+
+animate_points(t = dengue$date, x = dengue$long, y= dengue$lat, Rj = dengue$Rj, interval = "week",basemap = Taiwan)
 }
-\keyword{median}

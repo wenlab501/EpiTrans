@@ -2,19 +2,19 @@
 % Please edit documentation in R/SequentialNumbering.R
 \name{SequentialNumbering}
 \alias{SequentialNumbering}
-\title{Title}
+\title{Give sequential number by region}
 \usage{
 SequentialNumbering(region)
 }
 \arguments{
-\item{mean}{mean.}
+\item{region}{Vector of region name of each data points}
+}
+\value{
 
-\item{sd}{sd}
 }
 \description{
-Descriptions Here
+Give sequential number by region
 }
 \examples{
-median_function(seq(1:10))
+SequentialNumbering(covid19$region)
 }
-\keyword{median}

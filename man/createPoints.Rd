@@ -2,19 +2,27 @@
 % Please edit documentation in R/createPoints.R
 \name{createPoints}
 \alias{createPoints}
-\title{Title}
+\title{Create points data}
 \usage{
 createPoints(XY.data, crs = NULL, basemap = NULL)
 }
 \arguments{
-\item{mean}{mean.}
+\item{XY.data}{Data frame of points;must (at least) contain a column of x coordinate called 'x', and a column of y coordinate called 'y';and other column if needed such as 't' (time), 'Rj' (reproductive numbers ).}
 
-\item{sd}{sd}
+\item{crs}{Coordinate reference system of data points: numeric (EPSG code), object of class 'crs', or input string for st_crs; if NULL, using CRS of basemap, or using WGS84 (EPSG:4326).}
+
+\item{basemap}{Object of class 'sf'; reference crs to create points on the crs of this basemap}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Create sf points data by data frame with coordinates
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+points = RndPts[,2:3]
+
+createPoints(points,crs = 4326,basemap = Taiwan)
 }
-\keyword{median}

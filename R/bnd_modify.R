@@ -1,15 +1,25 @@
-#' Title
+#' Adjust the boundary of the plot map
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Auto adjust the boundary of the plot map
+#'
+#' @param sf Object of class 'sf'.
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' data("EpiTrans")
+#'
+#' bnd <- bnd_modify(Taiwan)
+#' @import sf
+#' @export
 
 bnd_modify <- function(sf){
-  require("sf")
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    stop(
+      "Package \"sf\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
   bnd <- st_bbox(sf)
   x <- bnd[1]
   y <- bnd[2]

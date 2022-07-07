@@ -2,19 +2,31 @@
 % Please edit documentation in R/plot_trans.R
 \name{plot_trans}
 \alias{plot_trans}
-\title{Title}
+\title{Visualize pair-wise transmission likelihood}
 \usage{
 plot_trans(Rj, from = 1:200, to = 1:200, title = NULL)
 }
 \arguments{
-\item{mean}{mean.}
+\item{Rj}{Input the result of 'Rj'; a list must contain a matrix of individual transmission probablity from case i to case j called 'Pij'.}
 
-\item{sd}{sd}
+\item{from}{Origin of transmission, y-axis on the plot.}
+
+\item{to}{Destination of transmission, x-axis on the plot.}
+
+\item{title}{Main title of plot.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Plot the individual transmission probablity matrix
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+res_adj = Rj(t = dengue$date, x = dengue$long, y = dengue$lat,GI.pdf = lpdf_GI(),SW.pdf = lpdf_SW(), adjSP = TRUE)
+res = Rj(t = dengue$date, GI.pdf = lpdf_GI(), adjSP = FALSE)
+
+plot_trans(res, from = 1:200, to = 1:200)
+plot_trans(res_adj, from = 1:200, to = 1:200)
 }
-\keyword{median}

@@ -2,19 +2,26 @@
 % Please edit documentation in R/ReduceMatrix.R
 \name{ReduceMatrix}
 \alias{ReduceMatrix}
-\title{Title}
+\title{Reduce individual transmission probablity matrix to region transmission matrix}
 \usage{
 ReduceMatrix(matrix, group)
 }
 \arguments{
-\item{mean}{mean.}
+\item{matrix}{Matrix of individual transmission probablity from case i to case j}
 
-\item{sd}{sd}
+\item{group}{Vector of grouop, or region(polygon) of cases}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Reduce individual transmission probablity matrix to region transmission matrix
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+covid.R_adj=Rj(t = covid$date, x = covid$x, y = covid$y, GI.pdf = lpdf_GI(5.2,1.5), unit_coord = "meter")
+
+Tij = ReduceMatrix(covid.R_adj$Pij,covid$region)
 }
-\keyword{median}

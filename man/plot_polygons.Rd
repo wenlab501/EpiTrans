@@ -2,19 +2,26 @@
 % Please edit documentation in R/plot_polygons.R
 \name{plot_polygons}
 \alias{plot_polygons}
-\title{Title}
+\title{Draw Choropleth map}
 \usage{
 plot_polygons(region, sf, interact = TRUE, gridLonLat = TRUE)
 }
 \arguments{
-\item{mean}{mean.}
+\item{region}{Vector of region (polygon) name of data points.}
 
-\item{sd}{sd}
+\item{sf}{Object of class 'sf'; polygon layer of statistical data (region data of these data points).}
+
+\item{interact}{Logical; if TRUE, plot thematic interactive map; if FALSE, static plotting non-interactive thematic map.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
 }
 \description{
-Descriptions Here
+Plot chorolepth map of cases by grouping region
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+
+plot_polygons(region = covid$region,sf = Taipei)
 }
-\keyword{median}

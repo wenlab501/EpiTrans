@@ -2,7 +2,7 @@
 % Please edit documentation in R/animate_polygons.R
 \name{animate_polygons}
 \alias{animate_polygons}
-\title{Title}
+\title{Visualizing the spatio-temporal pattern of choropleth map}
 \usage{
 animate_polygons(
   region,
@@ -17,14 +17,33 @@ animate_polygons(
 )
 }
 \arguments{
-\item{mean}{mean.}
+\item{region}{Vector of region (polygon) name of data points.}
 
-\item{sd}{sd}
+\item{t}{Vector of time of data points.}
+
+\item{sf}{Object of class 'sf'; polygon layer of statistical data (region data of these data points).}
+
+\item{interval}{Character; time resolution(day, week, month) of animation ; aggregrate data through day, week or month.}
+
+\item{breaks}{Numeric vector to tell how chorolepth classify.}
+
+\item{gridLonLat}{Logical; draw latitude and longitude grid on non-interactive map.}
+
+\item{width}{Width of the animation file (in pixels).}
+
+\item{height}{Height of the animation file (in pixels).}
+
+\item{delay}{Delay time between images (in 1/100th of a second).}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Generate animation of chorolepth map of cases by grouping region
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+covid = GeoLocater(TimeDF = covid19,PointsDF = RndPts)
+
+animate_polygons(region = covid$region,t = covid$date,sf = Taipei)
 }
-\keyword{median}

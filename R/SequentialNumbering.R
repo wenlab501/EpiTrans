@@ -1,12 +1,13 @@
-#' Title
+#' Give sequential number by region
 #'
-#' Descriptions Here
-#' @param mean mean.
-#' @param sd sd
-#' @keywords median
-#' @export
+#' Give sequential number by region
+#'
+#' @param region Vector of region name of each data points
+#' @return
+#'
 #' @examples
-#' median_function(seq(1:10))
+#' SequentialNumbering(covid19$region)
+#' @export
 
 SequentialNumbering <- function(region){
   regions <- unique(region)

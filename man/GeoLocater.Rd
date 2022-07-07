@@ -2,19 +2,23 @@
 % Please edit documentation in R/GeoLocater.R
 \name{GeoLocater}
 \alias{GeoLocater}
-\title{Title}
+\title{Calculate the number of cases.}
 \usage{
 GeoLocater(TimeDF, PointsDF)
 }
 \arguments{
-\item{mean}{mean.}
+\item{TimeDF}{Data frame of points regarding time;must contain a column of place (region, polygon name) called 'region', and a column of time called 'time'.}
 
-\item{sd}{sd}
+\item{PointsDF}{Data frame (regarding space) of population points or random points in polygons; must contain a column of place (region, polygon name) called 'region', and a column of x coordinate called 'x', and a column of y coordinate called 'y'.}
+}
+\value{
+
 }
 \description{
-Descriptions Here
+Convert polygon data to point coordinates, random sampling and locating to get the cases points' coordinates
 }
 \examples{
-median_function(seq(1:10))
+data("EpiTrans")
+
+GeoLocater(TimeDF = covid19,PointsDF = RndPts)
 }
-\keyword{median}

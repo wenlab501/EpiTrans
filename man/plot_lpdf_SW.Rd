@@ -2,19 +2,20 @@
 % Please edit documentation in R/plot_lpdf_SW.R
 \name{plot_lpdf_SW}
 \alias{plot_lpdf_SW}
-\title{Title}
+\title{Visualizing probability density functions.}
 \usage{
 plot_lpdf_SW(mean = 125, from = 0, to = 1000)
 }
 \arguments{
-\item{mean}{mean.}
+\item{mean}{Mean tranmission distance of exponential distribution.}
 
-\item{sd}{sd}
+\item{from}{Minimum of x of the plot.}
+
+\item{to}{Maximum of x of the plot.}
 }
 \description{
-Descriptions Here
+Plot the probability distribution of tranmission distance
 }
 \examples{
-median_function(seq(1:10))
+plot_lpdf_SW(mean = 125, from = 0, to = 1000)
 }
-\keyword{median}

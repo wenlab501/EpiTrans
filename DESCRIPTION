@@ -1,12 +1,31 @@
-Package: EpiTrans
 Type: Package
-Title: R package for estimation of epidemic transmissibility in time and space
+Package: EpiTrans
+Title: R package for estimation of epidemic transmissibility in time and
+    space
 Version: 0.1.0
 Author: Chen-Hsuan Tu, Ta-Chou Ng, Tzai-Hung Wen
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: R package for estimation of epidemic transmissibility in time and space
+Description: R package for estimation of epidemic transmissibility in time
+    and space
 License: What license is it under?
-Imports: Matrix, ggplot2, sf, gganimate, gifski, png, transformr, dplyr, tmap, reshape2, stplanr, SpatialKDE, tmaptools
+Imports: 
+    dplyr,
+    gganimate,
+    ggplot2,
+    gifski,
+    MASS,
+    Matrix,
+    png,
+    RColorBrewer,
+    reshape2,
+    sf,
+    SpatialKDE,
+    stplanr,
+    tmap,
+    tmaptools,
+    transformr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
+Depends: 
+    R (>= 2.10)
